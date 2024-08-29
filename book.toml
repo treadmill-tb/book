@@ -1,5 +1,5 @@
 [book]
-authors = ["Leon Schuermann"]
+authors = ["Treadmill Project Developers <devel@treadmill.ci>"]
 language = "en"
 multilingual = false
 src = "src"
