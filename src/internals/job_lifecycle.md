@@ -2,7 +2,7 @@
 
 Treadmill jobs represent units of work schedulable on a supervisor. Each job is
 eligible to run on a set of supervisors, limited by a set of *tag filter
-expresssions* governed by the job request, and the permissions of the user who
+expressions* governed by the job request, and the permissions of the user who
 scheduled the job.
 
 From the point of their creation up to their successful completion or failure,
