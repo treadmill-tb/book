@@ -1,0 +1,12 @@
+{
+  "url": "https://github.com/treadmill-tb/deployments.git",
+  "rev": "2d346b727426e397b399f4d767b2f0097f37297b",
+  "date": "2024-09-03T13:59:01-04:00",
+  "path": "/nix/store/j3j8048f8df9p70xv4g6pjwzf88pqk7j-deployments",
+  "sha256": "1npq463069hylwj8659vvrg18r94x8pjrshh80b16yi85arw4d2k",
+  "hash": "sha256-UzTCsyooehMWQBDqLC/qJGUUXt47FYMkpx4mA4Yh+No=",
+  "fetchLFS": false,
+  "fetchSubmodules": false,
+  "deepClone": false,
+  "leaveDotGit": false
+}
