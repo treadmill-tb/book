@@ -88,6 +88,7 @@ performed by a Supervisor. The `Terminated` state can be reached by either
   Supervisor failures or restarts.
 
 Valid Transitions:
+
 | To → <br> From ↓ | Q'd | Sched | Init | Ready | Term-ing | Term'd |
 |------------------|-----|-------|------|-------|----------|--------|
 | Queued           | -   | ✔     | ✔    | ✔     | ✔        | ✔      |
@@ -173,6 +174,7 @@ enum ExitStatus {
 ```
 
 Valid Transitions:
+
 | To → <br> From ↓         | SupMF | QTime | IntSupE | SupHSE | JobC | JobUS | JobUE | SupJDrop |
 |--------------------------|-------|-------|---------|--------|------|-------|-------|----------|
 | SupervisorMatchError     | -     | ✘     | ✘       | ✘      | ✘    | ✘     | ✘     | ✘        |
@@ -187,6 +189,7 @@ Valid Transitions:
 We further impose the following restricts on transitions of exit statuses
 depending on the current execution state (**note the flipped rows & columns for
 readability**):
+
 | In Execution State → <br> To Exit Status ↓ | Q'd | Sched | Init | Ready | Term-ing | Term'd |
 |--------------------------------------------|-----|-------|------|-------|----------|--------|
 | SupervisorMatchError                       | ✔   | ✘     | ✘    | ✘     | ✘        | ✘      |
