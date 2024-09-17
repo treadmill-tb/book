@@ -81,6 +81,7 @@ enum ExecutionState {
 A transition into `Queued` may only be performed by the Switchboard. A
 transition into the `Initializing`, `Ready`, and `Terminating` state may only be
 performed by a Supervisor. The `Terminated` state can be reached by either
+
 - an explicit state transition initiated by a Supervisor, or
 - the Switchboard, when it observes that a Supervisor is no longer reporting to
   be executing a job that was once `Scheduled` on it. In this case, the exit
@@ -153,7 +154,7 @@ enum ExitStatus {
     /// This status may be reported through the Puppet process executing within
     /// the host, and may optionally contain additional user-supplied
     /// information.
-    JobUserSuccess,
+    WorkloadFinishedSuccess,
 
     /// The host itself reports that the user-defined workload failed with an
     /// error.
@@ -161,7 +162,15 @@ enum ExitStatus {
     /// This status may be reported through the Puppet process executing within
     /// the host, and may optionally contain additional user-supplied
     /// information.
-    JobUserError,
+    WorkloadFinishedError,
+
+    /// The host itself reports that the user-defined workload terminated,
+    /// while indicating neither success nor failure.
+    ///
+    /// This status may be reported through the Puppet process executing within
+    /// the host, and may optionally contain additional user-supplied
+    /// information.
+    WorkloadFinishedUnknown,
 
     /// The job vanished from its supervisor, without reaching the
     /// `Terminated` execution state first.
@@ -169,22 +178,28 @@ enum ExitStatus {
     /// This may be due to a supervisor crash or restart. This exit status is
     /// can only be set by the Switchboard. **This exit status is final.** No
     /// subsequently reported exit status may override this status.
-    SupervisorJobDropped,
+    SupervisorDroppedJob,
+
+    /// The job timed out while dispatched.
+    ///
+    /// **This exit status is final. No subsequently reported exit status may
+    /// override this status.
+    JobTimeout,
 }
 ```
 
 Valid Transitions:
 
-| To → <br> From ↓         | SupMF | QTime | IntSupE | SupHSE | JobC | JobUS | JobUE | SupJDrop |
-|--------------------------|-------|-------|---------|--------|------|-------|-------|----------|
-| SupervisorMatchError     | -     | ✘     | ✘       | ✘      | ✘    | ✘     | ✘     | ✘        |
-| QueueTimeout             | ✘     | -     | ✘       | ✘      | ✘    | ✘     | ✘     | ✘        |
-| InternalSupervisorError  | ✘     | ✘     | -       | ✘      | ✘    | ✘     | ✘     | ✘        |
-| SupervisorHostStartError | ✘     | ✘     | ✘       | -      | ✘    | ✘     | ✘     | ✘        |
-| JobCanceled              | ✘     | ✘     | ✘       | ✘      | -    | ✘     | ✘     | ✘        |
-| JobUserSuccess           | ✘     | ✘     | ✔       | ✔      | ✔    | -     | ✔     | ✔        |
-| JobUserError             | ✘     | ✘     | ✔       | ✔      | ✔    | ✔     | -     | ✔        |
-| SupervisorJobDropped     | ✘     | ✘     | ✘       | ✘      | ✘    | ✘     | ✘     | -        |
+| To → <br> From ↓         | SupMF | QTime | IntSupE | SupHSE | JobC | WFS* | SupJDrop | JobTimeout |
+|--------------------------|-------|-------|---------|--------|------|------|----------|------------|
+| SupervisorMatchError     | -     | ✘     | ✘       | ✘      | ✘    | ✘    | ✘        | ✘          |
+| QueueTimeout             | ✘     | -     | ✘       | ✘      | ✘    | ✘    | ✘        | ✘          |
+| InternalSupervisorError  | ✘     | ✘     | -       | ✘      | ✘    | ✘    | ✘        | ✘          |
+| SupervisorHostStartError | ✘     | ✘     | ✘       | -      | ✘    | ✘    | ✘        | ✘          |
+| JobCanceled              | ✘     | ✘     | ✘       | ✘      | -    | ✘    | ✘        | ✘          |
+| WorkloadFinished*        | ✘     | ✘     | ✔       | ✔      | ✔    | -    | ✔        | ✔          |
+| SupervisorDroppedJob     | ✘     | ✘     | ✘       | ✘      | ✘    | ✘    | -        | ✘          |
+| JobTimeout               | ✘     | ✘     | ✘       | ✘      | ✘    | ✘    | ✘        | -          |
 
 We further impose the following restricts on transitions of exit statuses
 depending on the current execution state (**note the flipped rows & columns for
@@ -197,6 +212,7 @@ readability**):
 | InternalSupervisorError                    | ✘   | ✔     | ✔    | ✔     | ✔        | ✘      |
 | SupervisorHostStartError                   | ✘   | ✔     | ✔    | ✔     | ✔        | ✘      |
 | JobCanceled                                | ✘   | ✔     | ✔    | ✔     | ✔        | ✘      |
-| JobUserSuccess                             | ✘   | ✔     | ✔    | ✔     | ✔        | ✘      |
-| JobUserError                               | ✘   | ✔     | ✔    | ✔     | ✔        | ✘      |
+| WorkloadFinished*                          | ✘   | ✔     | ✔    | ✔     | ✔        | ✘      |
 | SupervisorJobDropped                       | ✘   | ✔     | ✔    | ✔     | ✔        | ✘      |
+| JobTimeout                                 | ✘   | ✔     | ✔    | ✔     | ✔        | ✘      |
+
