@@ -4,7 +4,7 @@ This book is the primary documentation of the Treadmill Testbed
 project, software and hardware. It is divided up into the following
 main chapters:
 
-1. [**The User Guide**](user_guide.md): start here if you are new to Treadmill
+1. [**The User Guide**](user-guide.md): start here if you are new to Treadmill
    and you want to run interactive development sessions or use it to run some
    automated Continuous Integration workloads.
 
