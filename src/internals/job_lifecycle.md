@@ -183,7 +183,7 @@ enum ExitStatus {
     /// The job timed out while dispatched.
     ///
     /// **This exit status is final. No subsequently reported exit status may
-    /// override this status.
+    /// override this status.**
     JobTimeout,
 }
 ```
