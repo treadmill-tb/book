@@ -74,6 +74,11 @@ jobs:
     # Run this first step on GitHub's hosted infrastructure
     runs-on: ubuntu-latest
 
+    # Expose a few values to the test-execute job:
+    outputs:
+      runner-id: ${{ steps.gh-actions-jit-runner-config.outputs.runner-id }}
+      tml-job-id: ${{ steps.treadmill-job-launch.outputs.tml-job-id }}
+
     steps:
 	  # Required to compile the Treadmill CLI client:
       - uses: actions-rust-lang/setup-rust-toolchain@v1
@@ -100,20 +105,10 @@ jobs:
           cargo build --package tml-cli
           popd
           echo "$PWD/treadmill/target/debug" >> "$GITHUB_PATH"
-
-      # Replace $YOUR_TREADMILL_USER with your desired credentials:
-      - name: Login to the Treadmill Switchboard
-        run:
-          tml login $YOUR_TREADMILL_USER ${{ secrets.TREADMILL_LOGIN_PASSWORD }}
 ```
 
-<div class="warning"> We plan to provide pre-compiled CLI binaries, a GitHub
-workflow template, and the ability to use long-lived tokens instead of a
-username-password login for workflows in the future.</div>
-
-To allow the workflow to talk to the Treadmill switchboard, you should create a
-dedicated user for launching CI workloads and save its password in a
-[GitHub](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions).
+<div class="warning"> We plan to provide pre-compiled CLI binaries and GitHub
+workflow template that you can import in the future.</div>
 
 ### Registering a Just-in-time GitHub Actions Runner
 
@@ -194,20 +189,29 @@ Finally, we can create a new just-in-time runner in a subsequent step:
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
+		  # Create a unique string that identifies this runner across all
+		  # workflow invocations and attempts in this repository:
+          RUNNER_ID="tml-gh-actions-runner-${GITHUB_REPOSITORY_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+
 		  # Perform the API request to register the just-in-time runner.
           RUNNER_CONFIG_JSON="$(gh api \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             /repos/$YOUR_ORG/$YOUR_REPO/actions/runners/generate-jitconfig \
-            -f "name=treadmill-runner" \
+            -f "name=$RUNNER_ID" \
             -F "runner_group_id=1" \
-            -f "labels[]=treadmill-runner" \
+            -f "labels[]=$RUNNER_ID" \
             -f "work_folder=_work")"
 
 		  # The above returns a JSON object containing a base64-encoded
 		  # "jit config". We need to retain this value for starting the runner.
 		  # Provide it to subsequent steps as an output:
 		  echo "jitconfig=$(echo "$RUNNER_CONFIG_JSON" | jq -r '.encoded_jit_config')"
+
+	      # The test-execute workflow will need to match on a specific
+		  # runner-label assigned to the self-hosted runner. Export our
+		  # runner-id here, which we've set as a label above:
+          echo "runner-id=$RUNNER_ID"
 ```
 
 Next, we'll pass this value into the Treadmill job's parameters and start a job
@@ -215,4 +219,102 @@ that launches a GitHub actions runner on boot.
 
 ## Launching a Treadmill Job
 
-To write
+With the runner registration token generated, we're ready to launch the
+Treadmill job that will ultimately host this runner. For this, we add another
+workflow step as follows:
+
+```yaml
+      - name: Create GitHub just-in-time runner
+        id: treadmill-launch-job
+        env:
+          TML_API_TOKEN: ${{ secrets.TREADMILL_API_TOKEN }}
+		  # A Treadmill GitHub Actions image which includes the self-hosted runner:
+		  IMAGE_ID: "d407b09b9f56c666d0d3350890e364ba16aad08b484f4ca1de19d42569cc79b1"
+		  DUT_BOARD: "nrf52840dk"
+        run: |
+          echo "Enqueueing Treadmill job:"
+
+	      # Manually create a JSON object that specifies the job parameters and
+		  # contains the registration token for the GitHub actions runner.
+		  #
+		  # The Treadmill GitHub Actions images will search for this parameter
+		  # and use it to configure their included self-hosted runner:
+          TML_JOB_PARAMETERS="{\
+		    \"gh-actions-runner-encoded-jit-config\": {\
+			  \"secret\": true, \"value\": \"${{ steps.gh-actions-jit-runner-config.outputs.jitconfig }}\"\
+		    }
+		  }"
+
+          # Finally, run the `job enqueue` command. You can optionally specify
+		  # SSH keys for interactive debugging:
+          TML_JOB_ID_JSON="$(tml job enqueue \
+            "IMAGE_ID" \
+            --tag-config "board:$DUT_BOARD" \
+            --parameters "$TML_JOB_PARAMETERS" \
+          )"
+
+          TML_JOB_ID="$(echo "$TML_JOB_ID_JSON" | jq -r .job_id)"
+          echo "Enqueued Treadmill job with ID $TML_JOB_ID"
+
+          # Pass the job IDs and other configuration data into the outputs of
+          # this step, such that we can run test-execute job instances for each
+          # Treadmill job we've started:
+          echo "tml-job-id=\"$TML_JOB_ID\"" >> "$GITHUB_OUTPUT"
+```
+
+We provide another repository secret, called `TML_API_TOKEN`, to this step. The
+`tml` CLI client will detect this environment variable and use the API token to
+authenticate against the Switchboard API.
+
+<div class="warning">As of now, the only way to create a long-lived API token
+useful for such workflows is by manually editing the database. We plan to create
+an API for managing API tokens in the future.</div>
+
+This step takes in the `jitconfig` output from the previous step and enqueues a
+new Treadmill job that is parameterized over this value. It is important to set
+the Treadmill image ID to an image which is configured to run a GitHub Actions
+self-hosted runner on bootup and performs the necessary configuration based on
+the `gh-actions-runner-encoded-jit-config` parameter.
+
+After this step is executed, the Treadmill testbed will launch this job on an
+appropriate host (selected by tag `board:$DUT_BOARD`) and the host will register
+a new GitHub actions runner. We now define the part of the Actions workflow file
+that runs on the Treadmill host itself.
+
+## Running a GitHub Actions Job on the Treadmill Host
+
+To run a job on our newly started host, we add another job definition to our
+workflow file. Importantly, this second `test-execute` job has a dependency on
+the first `test-prepare` job. It also selects the unique `RUNNER_ID` that we've
+generated above as its `runs-on` target. This ensures that this job will only be
+eligible on the Treadmill host that we've requested for it. We can then proceed
+to run regular steps, as we would in any other GitHub Actions workflow file:
+
+```yaml
+  test-execute:
+    needs: test-prepare
+    runs-on: ${{ needs.test-prepare.outputs.runner-id }}
+
+    steps:
+      - name: Print Treadmill Job Context and Debug Information
+        run: |
+          echo "Treadmill job id: ${{ needs.test-prepare.outputs.tml-job-id }}"
+          echo "GitHub Actions Runner ID: ${{ needs.test-prepare.outputs.runner-id }}"
+          echo "Network configration:"
+          ip address
+          echo "Attached USB devices:"
+          lsusb
+          echo "Parameters:"
+          ls /run/tml/parameters
+
+      - uses: actions/checkout@v4
+
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Build the Tock kernel
+        run: |
+          pushd boards/nordic/nrf52840dk
+          unset RUSTFLAGS
+          make
+          popd
+```
