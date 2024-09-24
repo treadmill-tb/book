@@ -17,8 +17,8 @@ let
 
 in
 pkgs.writeText "deployments-info-${site}.md" ''
-  | ID | Type | Board | Host |
-  |----|------|-------|------|
+  | ID | Type | Board | Host | SSH Endpoint |
+  |----|------|-------|------|--------------|
   ${
     lib.concatStringsSep "\n" (
       lib.mapAttrsToList (supervisorId: siteSupervisor: let
@@ -35,8 +35,17 @@ pkgs.writeText "deployments-info-${site}.md" ''
             ""
           else
             builtins.throw "Unknown supervisor host for type ${supervisor.type}";
+        sshEndpoint =
+          if supervisor.type == "nbd_netboot_host" then
+            ""
+          else if supervisor.type == "nbd_netboot_static" then
+            ""
+          else if supervisor.type == "qemu" then
+            "sns30.cs.princeton.edu:${builtins.toString siteSupervisor.qemu_host_ip4.ssh_forward_host_port}"
+          else
+            builtins.throw "Unknown SSH endpoint for type ${supervisor.type}";
       in
-        "| <a href=\"#board-${supervisorId}\" title=\"${supervisorId}\">${shortId}...</a> | ${type} | ${board} | ${host} |"
+        "| <a href=\"#board-${supervisorId}\" title=\"${supervisorId}\">${shortId}...</a> | ${type} | ${board} | ${host} | ${sshEndpoint} |"
       ) sites."${site}".supervisors
     )
   }

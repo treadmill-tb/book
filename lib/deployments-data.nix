@@ -1,5 +1,8 @@
 { pkgs ? import <nixpkgs> {} }:
 
+# To update the deployments repo (also running on GitHub nightly CI):
+# nix-prefetch-git --url https://github.com/treadmill-tb/deployments.git --rev refs/heads/main > deployments-data.json
+
 let
   deploymentsGit = builtins.fromJSON (builtins.readFile ./deployments-data.json);
 
