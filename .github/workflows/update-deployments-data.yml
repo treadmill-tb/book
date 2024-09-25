@@ -28,12 +28,6 @@ jobs:
       with:
         nix_path: nixpkgs=channel:nixos-unstable
 
-    - name: Install mdBook
-      run: |
-        curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf -y | sh
-        rustup update
-        cargo install --version ${MDBOOK_VERSION} mdbook
-
     - name: Update the deployments-data.json file and re-generate markdown files
       run: |
         pushd lib
@@ -47,7 +41,7 @@ jobs:
         popd
 
     - name: Test mdbook build
-      run: mdbook build
+      run: nix-shell -p mdbook --run "mdbook build"
 
     # Commit changes back to repo:
     - uses: stefanzweifel/git-auto-commit-action@v5
