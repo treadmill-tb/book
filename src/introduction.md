@@ -14,7 +14,7 @@ main chapters:
    instance hosted at `swx.treadmill.ci`. You can find the available hardware
    resources and documentation of the individual setups there.
 
-3. [**The Operator's Guide**](operator_guide.md): This chapter contains guides
+3. [**The Operator's Guide**](operator-guide.md): This chapter contains guides
    and other useful information for operators of the Treadmill switchboard or
    site deployments.
 

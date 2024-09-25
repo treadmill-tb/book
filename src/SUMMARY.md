@@ -8,6 +8,7 @@
   - [Images](./treadmillci-deployment/images.md)
   - [Sites](./treadmillci-deployment/sites.md)
     - [pton-srv0](./treadmillci-deployment/sites/pton-srv0.md)
-- [Operator's Guide](./operator_guide.md)
+- [Operator's Guide](./operator-guide.md)
+  - [Admin Snippets](./operator-guide/admin-snippets.md)
 - [Internals](./internals.md)
   - [Job Lifecycle](./internals/job_lifecycle.md)
