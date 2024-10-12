@@ -10,7 +10,7 @@ use the following bash snippet, which will create the Treadmill image
 store structure (`images/` and `blobs/`) in your current directory and
 download all files not already present:
 ```
-$ wget -r -p -E -K -np -nH -nc --content-disposition --trust-server-names -i <(wget -O- -o/dev/null https://a.images.treadmill.ci/all.txt | sed 's|^\./|https://a.images.treadmill.ci/|')
+$ wget -r -p -E -K -np -nH -nc --content-disposition --trust-server-names --no-http-keep-alive -i <(wget -O- -o/dev/null https://a.images.treadmill.ci/all.txt | sed 's|^\./|https://a.images.treadmill.ci/|')
 ```
 
 ## `vm-ubuntu-2204-amd64-uefi`
