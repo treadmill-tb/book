@@ -27,7 +27,7 @@ pkgs.writeText "deployments-info-${site}.md" ''
         type = typeMap."${supervisor.type}";
         board = "${supervisor.board.manufacturer} ${supervisor.board.model}";
         host =
-          if supervisor.type == "nbd_netboot_host" then
+          if supervisor.type == "nbd_netboot" then
             supervisor.nbd_netboot_host.model
           else if supervisor.type == "nbd_netboot_static" then
             supervisor.nbd_netboot_host.model
@@ -36,8 +36,8 @@ pkgs.writeText "deployments-info-${site}.md" ''
           else
             builtins.throw "Unknown supervisor host for type ${supervisor.type}";
         sshEndpoint =
-          if supervisor.type == "nbd_netboot_host" then
-            ""
+          if supervisor.type == "nbd_netboot" then
+            "sns30.cs.princeton.edu:${builtins.toString siteSupervisor.nbd_netboot_host_ip4.ssh_forward_host_port}"
           else if supervisor.type == "nbd_netboot_static" then
             ""
           else if supervisor.type == "qemu" then

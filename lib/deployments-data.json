@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/treadmill-tb/deployments.git",
   "rev": "8e9585d84360d4738e58375de21f32edcf08978b",
-  "date": "2024-10-13T14:04:57Z",
+  "date": "2024-10-13T14:04:57+00:00",
   "path": "/nix/store/51nkcs7hrdb7v2k135llzjj9c1diqvvb-deployments",
   "sha256": "1fkh0imaj9hq7nk1v3hm8rhcwyj45b40wxj732zw2fy5s7fwhibz",
   "hash": "sha256-f0XI3dHFO8G/GEd2DsgqRHrOYEYVjh2mPRgmqWoEcLo=",
