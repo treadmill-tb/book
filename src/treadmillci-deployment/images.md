@@ -19,12 +19,37 @@ Versions:
 
 | Build Date | git Revision                                                                                                                                          | Image ID                                                           |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2024-10-13 | [`68cfe43a22`](https://github.com/treadmill-tb/images/blob/68cfe43a225bf83bba4fe3fe11723bda7da9c45f/vm-ubuntu-2204-amd64-uefi/default.nix) | `616a372120b0afce9310a07c2e3b4c897b9cbccdfec4cf01ccbcca82c156ee05` |
 | 2024-09-24 | [`f7f6a60239`](https://github.com/treadmill-tb/images/blob/f7f6a6023970684ab56515fcdedf1b5792f368f7/vm-ubuntu-2204-amd64-uefi/default.nix) | `4864215aff5840792f3f871cb74d0e74170b199406a56422612efa715e72e1a5` |
 
 <details>
 <summary>Build logs:</summary>
 
-### f7f6a60239
+### `68cfe43a22`
+
+```
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> git rev-parse HEAD
+68cfe43a225bf83bba4fe3fe11723bda7da9c45f
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
+/nix/store/fcssv6py0hh2p4hfd9w5h9pl5d3ysz5p-treadmill-store
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/6c/
+blobs/6c/82/
+blobs/6c/82/47/
+blobs/6c/82/47/6c8247e4440a4f9a691f67643c1d2adf87d48b6c475bd7b83599851cec785164
+images/61/
+images/61/6a/
+images/61/6a/37/
+images/61/6a/37/616a372120b0afce9310a07c2e3b4c897b9cbccdfec4cf01ccbcca82c156ee05
+
+sent 941,459,348 bytes  received 113 bytes  81,866,040.09 bytes/sec
+total size is 941,229,060  speedup is 1.00
+```
+
+
+### `f7f6a60239`
 
 ```
 leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> git rev-parse HEAD
@@ -57,12 +82,37 @@ Versions:
 
 | Build Date | git Revision                                                                                                                                          | Image ID                                                           |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2024-10-13 | [`68cfe43a22`](https://github.com/treadmill-tb/images/blob/68cfe43a225bf83bba4fe3fe11723bda7da9c45f/vm-ubuntu-2204-amd64-uefi/gh-actions-overlay.nix) | `9ac6e2f62fec7d41d81df9a3b2fc40f5b4efa3e94055ea43a83e29dc77b791ee` |
 | 2024-09-24 | [`f7f6a60239`](https://github.com/treadmill-tb/images/blob/f7f6a6023970684ab56515fcdedf1b5792f368f7/vm-ubuntu-2204-amd64-uefi/gh-actions-overlay.nix) | `0373bb7d728b36cb6083cfe12f27038b71972ceb90563b0037d4012df7b62bf4` |
 
 <details>
 <summary>Build logs:</summary>
 
-### f7f6a60239
+### `68cfe43a22`
+
+```
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> git rev-parse HEAD
+68cfe43a225bf83bba4fe3fe11723bda7da9c45f
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> nix-build gh-actions-overlay.nix
+/nix/store/25p7sbadzw5rj7b1dz23zxacw0ri8nzr-image-store
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/06/
+blobs/06/ff/
+blobs/06/ff/9f/
+blobs/06/ff/9f/06ff9fbb107733147c0ab2bd92efd4a2844b42c9ec60945d8e84de1b6194ed61
+blobs/6c/82/47/6c8247e4440a4f9a691f67643c1d2adf87d48b6c475bd7b83599851cec785164
+images/9a/
+images/9a/c6/
+images/9a/c6/e2/
+images/9a/c6/e2/9ac6e2f62fec7d41d81df9a3b2fc40f5b4efa3e94055ea43a83e29dc77b791ee
+
+sent 658,136,207 bytes  received 214,956 bytes  77,453,078.00 bytes/sec
+total size is 1,599,080,209  speedup is 2.43
+```
+
+### `f7f6a60239`
 
 ```
 leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> git rev-parse HEAD
@@ -94,12 +144,39 @@ Versions:
 
 | Build Date | git Revision                                                                                                                                          | Image ID                                                           |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2024-10-13 | [`68cfe43a22`](https://github.com/treadmill-tb/images/blob/68cfe43a225bf83bba4fe3fe11723bda7da9c45f/netboot-raspberrypi-nbd/default.nix) | `f0617619bfb9a459a42b70101af65ef6b8d34631955f1d46423674e9897f26fc` |
 | 2024-10-12 | [`914501ec25`](https://github.com/treadmill-tb/images/blob/914501ec25617613d8bc4d5ca034438e3030acf3/netboot-raspberrypi-nbd/default.nix) | `453facb39f3d786a3ab3075358665fca850025e5b342487066f7a5c5482bd8ab` |
 
 <details>
 <summary>Build logs:</summary>
 
-### 914501ec25
+### `68cfe43a22`
+
+```
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> git rev-parse HEAD
+68cfe43a225bf83bba4fe3fe11723bda7da9c45f
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
+/nix/store/wc452qz6yp2fy7qdlk0sn71rbcsky45g-treadmill-store
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/33/24/
+blobs/33/24/52/
+blobs/33/24/52/3324528e034d27c28f4b58b734aab3e0b041a1c57c044bcef1a3c552ff88665a
+blobs/50/
+blobs/50/16/
+blobs/50/16/df/
+blobs/50/16/df/5016df56e359098cb3c6e44bee77ee390c71e855908e4b0a528cbf4ba5d37f4f
+images/f0/
+images/f0/61/
+images/f0/61/76/
+images/f0/61/76/f0617619bfb9a459a42b70101af65ef6b8d34631955f1d46423674e9897f26fc
+
+sent 2,159,544,890 bytes  received 145 bytes  105,343,660.24 bytes/sec
+total size is 2,159,017,107  speedup is 1.00
+```
+
+### `914501ec25`
 
 ```
 leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> git rev-parse HEAD
@@ -127,12 +204,38 @@ Versions:
 
 | Build Date | git Revision                                                                                                                                          | Image ID                                                           |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2024-10-13 | [`68cfe43a22`](https://github.com/treadmill-tb/images/blob/68cfe43a225bf83bba4fe3fe11723bda7da9c45f/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `5f4b61324c27472b5354cd11229a0936320148cd6e852fbf05e1b7ff5b4598e6` |
 | 2024-09-24 | [`914501ec25`](https://github.com/treadmill-tb/images/blob/914501ec25617613d8bc4d5ca034438e3030acf3/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `df8337148b0b3c63b400955b7ea49b202f34ecb111b61cd60c45a96076d9e31a` |
 
 <details>
 <summary>Build logs:</summary>
 
-### 914501ec25
+### `68cfe43a22`
+
+```
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> git rev-parse HEAD
+68cfe43a225bf83bba4fe3fe11723bda7da9c45f
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> nix-build gh-actions-runner-overlay.nix
+/nix/store/wcihc56rzaqhbvqj0amzza8qk6ss69sv-image-store
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/33/24/52/3324528e034d27c28f4b58b734aab3e0b041a1c57c044bcef1a3c552ff88665a
+blobs/4f/
+blobs/4f/5d/
+blobs/4f/5d/5f/
+blobs/4f/5d/5f/4f5d5fb9780430b4fa4b8747c74af7d60f8a4e1f5accb3cd9871d66bf674b8ca
+blobs/50/16/df/5016df56e359098cb3c6e44bee77ee390c71e855908e4b0a528cbf4ba5d37f4f
+images/5f/
+images/5f/4b/
+images/5f/4b/61/
+images/5f/4b/61/5f4b61324c27472b5354cd11229a0936320148cd6e852fbf05e1b7ff5b4598e6
+
+sent 469,637,168 bytes  received 379,189 bytes  30,323,635.94 bytes/sec
+total size is 2,628,321,089  speedup is 5.59
+```
+
+### `914501ec25`
 
 ```
 leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> git rev-parse HEAD
