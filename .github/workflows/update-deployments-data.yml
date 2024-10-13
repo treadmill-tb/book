@@ -33,8 +33,10 @@ jobs:
         pushd lib
         nix-shell -p nix-prefetch-git --run "nix-prefetch-git --url https://github.com/treadmill-tb/deployments.git --rev refs/heads/main > deployments-data.json"
 
-        rm ../generated/boards-pton-srv0.md
+        # Use -f, to avoid errors if this file does not exist
+        rm -f ../generated/boards-pton-srv0.md
         nix-build --argstr site pton-srv0 site-info-md.nix
+        mkdir -p ../generated/
         cat result > ../generated/boards-pton-srv0.md
 
         rm -f result
@@ -45,7 +47,6 @@ jobs:
 
     # Commit changes back to repo:
     - uses: stefanzweifel/git-auto-commit-action@v5
-      if: always() # Run even if the script reported errors
       with:
         commit_message: Update lib/deployments-data.json and regenerate Markdown files
         commit_user_name: Treadmill Book Bot
