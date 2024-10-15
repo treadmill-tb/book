@@ -144,11 +144,30 @@ Versions:
 
 | Build Date | git Revision                                                                                                                                          | Image ID                                                           |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2024-10-15 | [`6803d17a74`](https://github.com/treadmill-tb/images/blob/6803d17a74a4158e80fc6bc6fe44c64543ff0d15/netboot-raspberrypi-nbd/default.nix) | `5db0bcba4ca3295c83d8cb0318651b78469b90cda9f124011c2bd15a0f1f8999` |
 | 2024-10-13 | [`68cfe43a22`](https://github.com/treadmill-tb/images/blob/68cfe43a225bf83bba4fe3fe11723bda7da9c45f/netboot-raspberrypi-nbd/default.nix) | `f0617619bfb9a459a42b70101af65ef6b8d34631955f1d46423674e9897f26fc` |
 | 2024-10-12 | [`914501ec25`](https://github.com/treadmill-tb/images/blob/914501ec25617613d8bc4d5ca034438e3030acf3/netboot-raspberrypi-nbd/default.nix) | `453facb39f3d786a3ab3075358665fca850025e5b342487066f7a5c5482bd8ab` |
 
 <details>
 <summary>Build logs:</summary>
+
+### `6803d17a74`
+
+```
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> git rev-parse HEAD
+6803d17a74a4158e80fc6bc6fe44c64543ff0d15
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> nix-build -I nixpkgs=https://github.com/nixos/nixpkgs/archive/release-24.05.tar.gz -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
+/nix/store/b4vwspja2w7zp8slajn4zb6xydz6bdp8-treadmill-store
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/50/a3/39/50a339bb4ec10902d7bae426fe216a8008fca81fa82ce9a8036ebad998320c98
+blobs/e4/4b/bd/e44bbd64b70c8afea5f704e8b6884f7d52bee81c75b84ac443bb77e45901acbf
+images/5d/b0/bc/5db0bcba4ca3295c83d8cb0318651b78469b90cda9f124011c2bd15a0f1f8999
+
+sent 217,190 bytes  received 378,929 bytes  51,836.43 bytes/sec
+total size is 2,155,740,307  speedup is 3,616.29
+```
 
 ### `68cfe43a22`
 
@@ -204,11 +223,37 @@ Versions:
 
 | Build Date | git Revision                                                                                                                                          | Image ID                                                           |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2024-10-15 | [`6803d17a74`](https://github.com/treadmill-tb/images/blob/6803d17a74a4158e80fc6bc6fe44c64543ff0d15/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `1b6900eff30f37b6d012240f63aa77a22e20934e7f6ebf38e25310552dc08378` |
 | 2024-10-13 | [`68cfe43a22`](https://github.com/treadmill-tb/images/blob/68cfe43a225bf83bba4fe3fe11723bda7da9c45f/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `5f4b61324c27472b5354cd11229a0936320148cd6e852fbf05e1b7ff5b4598e6` |
 | 2024-09-24 | [`914501ec25`](https://github.com/treadmill-tb/images/blob/914501ec25617613d8bc4d5ca034438e3030acf3/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `df8337148b0b3c63b400955b7ea49b202f34ecb111b61cd60c45a96076d9e31a` |
 
 <details>
 <summary>Build logs:</summary>
+
+### `6803d17a74`
+
+```
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> git rev-parse HEAD
+6803d17a74a4158e80fc6bc6fe44c64543ff0d15
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> nix-build -I nixpkgs=https://github.com/nixos/nixpkgs/archive/release-24.05.tar.gz gh-actions-runner-overlay.nix
+/nix/store/148134wsj8h3jbaz6gn7dl1igywgg48a-image-store
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/50/a3/39/50a339bb4ec10902d7bae426fe216a8008fca81fa82ce9a8036ebad998320c98
+blobs/e4/4b/bd/e44bbd64b70c8afea5f704e8b6884f7d52bee81c75b84ac443bb77e45901acbf
+blobs/f8/
+blobs/f8/d0/
+blobs/f8/d0/61/
+blobs/f8/d0/61/f8d06173c89ea48fb3c5214a7f16c3fb2c5964732602dcd230d535984d23e206
+images/1b/
+images/1b/69/
+images/1b/69/00/
+images/1b/69/00/1b6900eff30f37b6d012240f63aa77a22e20934e7f6ebf38e25310552dc08378
+
+sent 470,030,344 bytes  received 378,961 bytes  30,348,987.42 bytes/sec
+total size is 2,625,437,505  speedup is 5.58
+```
 
 ### `68cfe43a22`
 
