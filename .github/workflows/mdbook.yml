@@ -53,7 +53,7 @@ jobs:
   # Deployment job
   mdbook-deploy-gh-pages:
     # Only run on the main branch:
-    if: (github.event_name == 'workflow_dispatch' || github.event_name == 'push') && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event_name == 'workflow_run') && github.ref == 'refs/heads/main'
 
     # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
     # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
