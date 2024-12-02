@@ -4,6 +4,7 @@
   - [Terminology](./introduction/terminology.md)
 - [User Guide](./user-guide.md)
   - [GitHub Actions Integration](./user-guide/github-actions-integration.md)
+  - [Hardware Continuous Integration](./user-guide/hardware-ci.md)
 - [treadmill.ci Deployment](./treadmillci-deployment.md)
   - [Images](./treadmillci-deployment/images.md)
   - [Sites](./treadmillci-deployment/sites.md)
