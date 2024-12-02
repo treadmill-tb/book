@@ -151,7 +151,7 @@ class MyTest(OneshotTest):
     def oneshot_test(self, board):
         # Implement test logic
         output = board.serial.expect("Expected Output", timeout=10)
-        if outputvia :
+        if output:
             print("Test passed")
         else:
             raise Exception("Test failed")
