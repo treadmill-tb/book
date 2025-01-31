@@ -144,6 +144,7 @@ Versions:
 
 | Build Date | git Revision                                                                                                                                          | Image ID                                                           |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2024-01-31 | [`80fb129746`](https://github.com/treadmill-tb/images/blob/80fb129746645beebf328113140af8a1d2e41adc/netboot-raspberrypi-nbd/default.nix) | `718c28849d48e3fd9db6b17ce336bc532df8c3c32f4ac7e8b61a79b901f8f452` |
 | 2024-01-31 | [`920cbe203b`](https://github.com/treadmill-tb/images/blob/920cbe203b7ba34b571bedb1428b4f3b02cb04ca/netboot-raspberrypi-nbd/default.nix) | `718c28849d48e3fd9db6b17ce336bc532df8c3c32f4ac7e8b61a79b901f8f452` |
 | 2024-12-06 | [`bbaa65b4de`](https://github.com/treadmill-tb/images/blob/bbaa65b4de28ce20a55d79ac877bd1f1d060b2ae/netboot-raspberrypi-nbd/default.nix) | `58353de2cc7e2e84417af32a32957c1c75a4c28f7c0471c4598233e92310e3bd` |
 | 2024-10-30 | [`a4d1690d1e`](https://github.com/treadmill-tb/images/blob/a4d1690d1ef9c2e330a71237913279ab90ca545d/netboot-raspberrypi-nbd/default.nix) | `a1b25b7cd0cbea2abd2ee472761180049f31c736095f81c16c65a5877e9f2c44` |
@@ -153,6 +154,35 @@ Versions:
 
 <details>
 <summary>Build logs:</summary>
+
+### `80fb129746`
+
+```
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> git rev-parse HEAD
+80fb129746645beebf328113140af8a1d2e41adc
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
+fetching git input 'git+https://github.com/nix-community/fenix.git'
+fetching git input 'git+https://github.com/treadmill-tb/treadmill.git'
+/nix/store/bg2zw64ahh9k0dzrsij51g1f0rnw5nkk-treadmill-store
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/65/
+blobs/65/7f/
+blobs/65/7f/de/
+blobs/65/7f/de/657fde93f3d1f48cb190983c5ed97692d398100834ec2721696a3adaa19f9af5
+blobs/f0/
+blobs/f0/04/
+blobs/f0/04/37/
+blobs/f0/04/37/f00437ea67ca16a52ecb2b54bc691d148b79d728f68dc25b7e3cf8f02bc602ac
+images/a2/
+images/a2/e6/
+images/a2/e6/82/
+images/a2/e6/82/a2e682907bc4132a863149543ab26a2869c2c014ef6ad63ae0d66c088377deaf
+
+sent 2,149,318,777 bytes  received 148 bytes  84,287,016.67 bytes/sec
+total size is 2,148,793,491  speedup is 1.00
+```
 
 ### `920cbe203b`
 
@@ -303,6 +333,7 @@ Versions:
 
 | Build Date | git Revision                                                                                                                                          | Image ID                                                           |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2025-01-31 | [`80fb129746`](https://github.com/treadmill-tb/images/blob/80fb129746645beebf328113140af8a1d2e41adc/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `f94b8f8edd54321e6370d898f87ccbd2659a67ed0300fda2adc8099cdd157790` |
 | 2025-01-31 | [`920cbe203b`](https://github.com/treadmill-tb/images/blob/920cbe203b7ba34b571bedb1428b4f3b02cb04ca/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `3df57a5ee656ef85958e9cde04dd8ae44515b31efeef6a4d23ac3cd4d10a033c` |
 | 2024-12-06 | [`bbaa65b4de`](https://github.com/treadmill-tb/images/blob/bbaa65b4de28ce20a55d79ac877bd1f1d060b2ae/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `441aa838c1fae3466cf682315aee44bcdb5c192054d6238e6c073ccd44b9bf06` |
 | 2024-10-30 | [`a4d1690d1e`](https://github.com/treadmill-tb/images/blob/a4d1690d1ef9c2e330a71237913279ab90ca545d/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `df24da6c7a03d87b1b6b55162383a9dfdf48a129b5f3e648748f0f9d11cdb470` |
@@ -312,6 +343,33 @@ Versions:
 
 <details>
 <summary>Build logs:</summary>
+
+### `80fb129746`
+
+```
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> git rev-parse HEAD
+80fb129746645beebf328113140af8a1d2e41adc
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> nix-build -I nixpkgs=https://github.com/nixos/nixpkgs/archive/release-24.11.tar.gz gh-actions-runner-overlay.nix
+fetching git input 'git+https://github.com/nix-community/fenix.git'
+fetching git input 'git+https://github.com/treadmill-tb/treadmill.git'
+/nix/store/waazbzq4l490m49sk3dpjblv55z46xp6-image-store
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/46/
+blobs/46/d4/
+blobs/46/d4/a5/
+blobs/46/d4/a5/46d4a5f528a8145e151d2b42a6c88b21336d8815037cf70ea36e7e16687b6772
+blobs/65/7f/de/657fde93f3d1f48cb190983c5ed97692d398100834ec2721696a3adaa19f9af5
+blobs/f0/04/37/f00437ea67ca16a52ecb2b54bc691d148b79d728f68dc25b7e3cf8f02bc602ac
+images/f9/
+images/f9/4b/
+images/f9/4b/8f/
+images/f9/4b/8f/f94b8f8edd54321e6370d898f87ccbd2659a67ed0300fda2adc8099cdd157790
+
+sent 3,365,288 bytes  received 378,397 bytes  356,541.43 bytes/sec
+total size is 2,151,939,854  speedup is 574.82
+```
 
 ### `920cbe203b`
 
