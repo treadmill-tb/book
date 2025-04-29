@@ -19,11 +19,35 @@ Versions:
 
 | Build Date | git Revision                                                                                                                                          | Image ID                                                           |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2025-04-28 | [`c735a8de9e`](https://github.com/treadmill-tb/images/blob/c735a8de9ef2a9deb8177b9e6a5b30acc11bf62b/vm-ubuntu-2204-amd64-uefi/default.nix) | `5c47f05cfabf81eb1f6909ce09e232bea66954cf248ed9bca3e437f57768fc13` |
 | 2024-10-13 | [`68cfe43a22`](https://github.com/treadmill-tb/images/blob/68cfe43a225bf83bba4fe3fe11723bda7da9c45f/vm-ubuntu-2204-amd64-uefi/default.nix) | `616a372120b0afce9310a07c2e3b4c897b9cbccdfec4cf01ccbcca82c156ee05` |
 | 2024-09-24 | [`f7f6a60239`](https://github.com/treadmill-tb/images/blob/f7f6a6023970684ab56515fcdedf1b5792f368f7/vm-ubuntu-2204-amd64-uefi/default.nix) | `4864215aff5840792f3f871cb74d0e74170b199406a56422612efa715e72e1a5` |
 
 <details>
 <summary>Build logs:</summary>
+
+### `c735a8de9e`
+
+```
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> git rev-parse HEAD
+c735a8de9ef2a9deb8177b9e6a5b30acc11bf62b
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
+/nix/store/zj9gszd7adgyj56wcjy0sfnvhpy5rf2g-treadmill-store
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/5f/
+blobs/5f/1f/
+blobs/5f/1f/a9/
+blobs/5f/1f/a9/5f1fa9a64cf4e5e92d42b585f0abe905e6678ae831619c3237ceadb195276013
+images/5c/
+images/5c/47/
+images/5c/47/f0/
+images/5c/47/f0/5c47f05cfabf81eb1f6909ce09e232bea66954cf248ed9bca3e437f57768fc13
+
+sent 947,470,676 bytes  received 113 bytes  65,342,813.03 bytes/sec
+total size is 947,238,916  speedup is 1.00
+```
 
 ### `68cfe43a22`
 
