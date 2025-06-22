@@ -9,6 +9,7 @@
   - [Sites](./treadmillci-deployment/sites.md)
     - [pton-srv0](./treadmillci-deployment/sites/pton-srv0.md)
 - [Operator's Guide](./operator-guide.md)
+  - [Setting up a New Treadmill Site](./operator-guide/site-setup.md)
   - [Admin Snippets](./operator-guide/admin-snippets.md)
 - [Internals](./internals.md)
   - [Job Lifecycle](./internals/job_lifecycle.md)
