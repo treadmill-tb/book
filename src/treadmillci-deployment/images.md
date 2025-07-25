@@ -17,14 +17,40 @@ $ wget -r -p -E -K -np -nH -nc --content-disposition --trust-server-names --no-h
 
 Versions:
 
-| Build Date | git Revision                                                                                                                                          | Image ID                                                           |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| Build Date | git Revision                                                                                                                               | Image ID                                                           |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2025-07-25 | [`c31c9d017f`](https://github.com/treadmill-tb/images/blob/c31c9d017f0388a2f64f8d8678ad54f9f540e273/vm-ubuntu-2204-amd64-uefi/default.nix) | `07468169bc795e670bafad83feae432b95ecafe4e60c13385ec866a27f9a4df7` |
 | 2025-04-28 | [`c735a8de9e`](https://github.com/treadmill-tb/images/blob/c735a8de9ef2a9deb8177b9e6a5b30acc11bf62b/vm-ubuntu-2204-amd64-uefi/default.nix) | `5c47f05cfabf81eb1f6909ce09e232bea66954cf248ed9bca3e437f57768fc13` |
 | 2024-10-13 | [`68cfe43a22`](https://github.com/treadmill-tb/images/blob/68cfe43a225bf83bba4fe3fe11723bda7da9c45f/vm-ubuntu-2204-amd64-uefi/default.nix) | `616a372120b0afce9310a07c2e3b4c897b9cbccdfec4cf01ccbcca82c156ee05` |
 | 2024-09-24 | [`f7f6a60239`](https://github.com/treadmill-tb/images/blob/f7f6a6023970684ab56515fcdedf1b5792f368f7/vm-ubuntu-2204-amd64-uefi/default.nix) | `4864215aff5840792f3f871cb74d0e74170b199406a56422612efa715e72e1a5` |
 
 <details>
 <summary>Build logs:</summary>
+
+### `c31c9d017f`
+
+```
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> git rev-parse HEAD
+c31c9d017f0388a2f64f8d8678ad54f9f540e273
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> nix-build -I nixpkgs=https://github.com/nixos/nixpkgs/archive/nixos-25.05.tar.gz -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
+fetching git input 'git+https://github.com/nix-community/fenix.git'
+fetching git input 'git+https://github.com/treadmill-tb/treadmill.git'
+/nix/store/6kps7gmafa0skmk5q5p0vh0z33c9kjan-treadmill-store
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/ca/
+blobs/ca/cd/
+blobs/ca/cd/f7/
+blobs/ca/cd/f7/cacdf7c464666e032f98a1e509b77256fd443d4c394ab393f7fc3fa76f6e2f24
+images/07/
+images/07/46/
+images/07/46/81/
+images/07/46/81/07468169bc795e670bafad83feae432b95ecafe4e60c13385ec866a27f9a4df7
+
+sent 945,064,708 bytes  received 113 bytes  46,100,722.98 bytes/sec
+total size is 944,833,540  speedup is 1.00
+```
 
 ### `c735a8de9e`
 
@@ -106,11 +132,38 @@ Versions:
 
 | Build Date | git Revision                                                                                                                                          | Image ID                                                           |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2025-07-25 | [`c31c9d017f`](https://github.com/treadmill-tb/images/blob/c31c9d017f0388a2f64f8d8678ad54f9f540e273/vm-ubuntu-2204-amd64-uefi/gh-actions-overlay.nix) | `506c0af4c892e542ce578207ecc1abbf776bf825d3b1a72ddf295465af215756` |
 | 2024-10-13 | [`68cfe43a22`](https://github.com/treadmill-tb/images/blob/68cfe43a225bf83bba4fe3fe11723bda7da9c45f/vm-ubuntu-2204-amd64-uefi/gh-actions-overlay.nix) | `9ac6e2f62fec7d41d81df9a3b2fc40f5b4efa3e94055ea43a83e29dc77b791ee` |
 | 2024-09-24 | [`f7f6a60239`](https://github.com/treadmill-tb/images/blob/f7f6a6023970684ab56515fcdedf1b5792f368f7/vm-ubuntu-2204-amd64-uefi/gh-actions-overlay.nix) | `0373bb7d728b36cb6083cfe12f27038b71972ceb90563b0037d4012df7b62bf4` |
 
 <details>
 <summary>Build logs:</summary>
+
+### `c31c9d017f`
+
+```
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> git rev-parse HEAD
+c31c9d017f0388a2f64f8d8678ad54f9f540e273
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> nix-build -I nixpkgs=https://github.com/nixos/nixpkgs/archive/nixos-25.05.tar.gz gh-actions-overlay.nix
+fetching git input 'git+https://github.com/nix-community/fenix.git'
+fetching git input 'git+https://github.com/treadmill-tb/treadmill.git'
+/nix/store/6nlgbffa7kmhps2yjs95cng95z4aqcpb-image-store
+leons@caesium ~/p/t/i/vm-ubuntu-2204-amd64-uefi (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/a6/
+blobs/a6/85/
+blobs/a6/85/fc/
+blobs/a6/85/fc/a685fc1e896cb84380cf4fda4b76f64a2463773e8ac63c379bdc39efc09b1a10
+blobs/ca/cd/f7/cacdf7c464666e032f98a1e509b77256fd443d4c394ab393f7fc3fa76f6e2f24
+images/50/
+images/50/6c/
+images/50/6c/0a/
+images/50/6c/0a/506c0af4c892e542ce578207ecc1abbf776bf825d3b1a72ddf295465af215756
+
+sent 648,500,305 bytes  received 215,334 bytes  56,410,055.57 bytes/sec
+total size is 1,593,050,917  speedup is 2.46
+```
 
 ### `68cfe43a22`
 
@@ -166,8 +219,9 @@ total size is 1,598,752,529  speedup is 2.43
 
 Versions:
 
-| Build Date | git Revision                                                                                                                                          | Image ID                                                           |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| Build Date | git Revision                                                                                                                             | Image ID                                                           |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2025-07-25 | [`c31c9d017f`](https://github.com/treadmill-tb/images/blob/c31c9d017f0388a2f64f8d8678ad54f9f540e273/netboot-raspberrypi-nbd/default.nix) | `1d273d3864a064ba6775ec0d3a270cf216b7f2c8ff974bad5917cf47410914ce` |
 | 2024-01-31 | [`80fb129746`](https://github.com/treadmill-tb/images/blob/80fb129746645beebf328113140af8a1d2e41adc/netboot-raspberrypi-nbd/default.nix) | `a2e682907bc4132a863149543ab26a2869c2c014ef6ad63ae0d66c088377deaf` |
 | 2024-01-31 | [`920cbe203b`](https://github.com/treadmill-tb/images/blob/920cbe203b7ba34b571bedb1428b4f3b02cb04ca/netboot-raspberrypi-nbd/default.nix) | `718c28849d48e3fd9db6b17ce336bc532df8c3c32f4ac7e8b61a79b901f8f452` |
 | 2024-12-06 | [`bbaa65b4de`](https://github.com/treadmill-tb/images/blob/bbaa65b4de28ce20a55d79ac877bd1f1d060b2ae/netboot-raspberrypi-nbd/default.nix) | `58353de2cc7e2e84417af32a32957c1c75a4c28f7c0471c4598233e92310e3bd` |
@@ -178,6 +232,26 @@ Versions:
 
 <details>
 <summary>Build logs:</summary>
+
+### `c31c9d017f`
+
+```
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> git rev-parse HEAD
+c31c9d017f0388a2f64f8d8678ad54f9f540e273
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> nix-build -I nixpkgs=https://github.com/nixos/nixpkgs/archive/nixos-25.05.tar.gz -E 'with import <nixpkgs> {}; callPackage ./default.nix {}'
+fetching git input 'git+https://github.com/nix-community/fenix.git'
+fetching git input 'git+https://github.com/treadmill-tb/treadmill.git'
+/nix/store/r2cz4pk1cjvcvzj5s5rmhfcbxi3a1jcw-treadmill-store
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/d0/fe/85/d0fe85398093e5c0eb6eb0a207810d630421e4c2fd258f69196094758b238c80
+blobs/e8/39/ce/e839ce3984083b7c9b491615aa0382d159c5ee0204d252cce5efcf0225f1a622
+images/1d/27/3d/1d273d3864a064ba6775ec0d3a270cf216b7f2c8ff974bad5917cf47410914ce
+
+sent 217,200 bytes  received 378,957 bytes  20,917.79 bytes/sec
+total size is 2,156,657,811  speedup is 3,617.60
+```
 
 ### `80fb129746`
 
@@ -355,8 +429,9 @@ total size is 2,098,687,124  speedup is 3,452.68
 
 Versions:
 
-| Build Date | git Revision                                                                                                                                          | Image ID                                                           |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| Build Date | git Revision                                                                                                                                        | Image ID                                                           |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| 2025-07-25 | [`c31c9d017f`](https://github.com/treadmill-tb/images/blob/c31c9d017f0388a2f64f8d8678ad54f9f540e273/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `7222c531071705fcaaf2a82504c3d09c93701d8a307de266fb551294911a1181` |
 | 2025-01-31 | [`80fb129746`](https://github.com/treadmill-tb/images/blob/80fb129746645beebf328113140af8a1d2e41adc/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `f94b8f8edd54321e6370d898f87ccbd2659a67ed0300fda2adc8099cdd157790` |
 | 2025-01-31 | [`920cbe203b`](https://github.com/treadmill-tb/images/blob/920cbe203b7ba34b571bedb1428b4f3b02cb04ca/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `3df57a5ee656ef85958e9cde04dd8ae44515b31efeef6a4d23ac3cd4d10a033c` |
 | 2024-12-06 | [`bbaa65b4de`](https://github.com/treadmill-tb/images/blob/bbaa65b4de28ce20a55d79ac877bd1f1d060b2ae/netboot-raspberrypi-nbd/gh-actions-overlay.nix) | `441aa838c1fae3466cf682315aee44bcdb5c192054d6238e6c073ccd44b9bf06` |
@@ -367,6 +442,33 @@ Versions:
 
 <details>
 <summary>Build logs:</summary>
+
+### `c31c9d017f`
+
+```
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> git rev-parse HEAD
+c31c9d017f0388a2f64f8d8678ad54f9f540e273
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> nix-build -I nixpkgs=https://github.com/nixos/nixpkgs/archive/nixos-25.05.tar.gz gh-actions-runner-overlay.nix
+fetching git input 'git+https://github.com/nix-community/fenix.git'
+fetching git input 'git+https://github.com/treadmill-tb/treadmill.git'
+/nix/store/nirqlf570kb73x03xkymn7x92bi8c8y1-image-store
+leons@caesium ~/p/t/i/netboot-raspberrypi-nbd (main)> rsync -rv -L result/ leons@sns31.cs.princeton.edu:/var/www/a.images.treadmill.ci/
+sending incremental file list
+image.txt
+blobs/32/
+blobs/32/86/
+blobs/32/86/aa/
+blobs/32/86/aa/3286aac796e2fcf217eb5a2f9430022aa16a6f1247182b35170b71cb196c6fe8
+blobs/d0/fe/85/d0fe85398093e5c0eb6eb0a207810d630421e4c2fd258f69196094758b238c80
+blobs/e8/39/ce/e839ce3984083b7c9b491615aa0382d159c5ee0204d252cce5efcf0225f1a622
+images/72/
+images/72/22/
+images/72/22/c5/
+images/72/22/c5/7222c531071705fcaaf2a82504c3d09c93701d8a307de266fb551294911a1181
+
+sent 3,365,628 bytes  received 378,985 bytes  325,618.52 bytes/sec
+total size is 2,159,804,174  speedup is 576.78
+```
 
 ### `80fb129746`
 
